@@ -1,0 +1,52 @@
+## Interface: 70300
+## Notes: Gathering Node data from WoWHead for GatherMate2 & Gatherer
+## Title: WoWGatheringNodes v.@project-version@
+## Author: SLOKnightfall
+## X-Category: Map
+## X-Email:
+## Version:@project-version@
+## OptionalDeps: Gatherer, GatherMate2
+## X-Gatherer-Plugin-Name: WoWGatheringNodes
+## X-Gatherer-Plugin-Type: DATABASE
+## X-Gatherer-Plugin-DatabaseID: WoWGatheringNodes @project-date-iso@
+
+## SavedVariables: WoWGatheringNodesConfig,
+
+
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceDBOptions-3.0\AceDBOptions-3.0.xml
+#@end-no-lib-strip@
+
+#Localization
+Localization\objectNames.enUS.lua
+Localization\objectNames.deDE.lua
+Localization\objectNames.esES.lua
+Localization\objectNames.rFR.lua
+Localization\objectNames.itIT.lua
+Localization\objectNames.koKr.lua
+Localization\objectNames.ptBR.lua
+Localization\objectNames.ruRU.lua
+Localization\objectNames.zhCn.lua
+--@do-not-package@ 
+Localization\debug.lua
+--@end-do-not-package@ 
+
+#Core
+WoWGatheringNodes.lua
+WoWGatheringNodesdData.lua
+
+#Files for Gathermate importing
+Gathermate_ImportConfig.lua
+Gathermate_Import.lua
+
+#Files for Gatherer importing
+Gatherer_Import.lua
