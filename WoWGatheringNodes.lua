@@ -1,8 +1,9 @@
 --///////////////////////////////////////////////////////////////////////////////////////////
---
---
---
---
+--                           WoWGatheringNodes                          --
+--           https://mods.curse.com/addons/wow/279801-wowgatheringnodes          --
+--                                                                               --
+--             An Object Database and injector for Gathermate2 and Gatherer       --
+--			  All Rights Reserved					  --
 --///////////////////////////////////////////////////////////////////////////////////////////
 
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
