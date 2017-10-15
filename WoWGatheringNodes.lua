@@ -40,7 +40,7 @@ local myOptionsTable = {
 	args = {
 		clearData = {
 			name = L["Clear Data"],
-			desc = L["Clears data from memory if version has already been inported."],
+			desc = L["Clears data from memory if version has already been imported."],
 			type = "toggle",
 			set = function(info,val) WoWGatheringNodes.db.profile.AutoClear = val end,
 			get = function(info) return WoWGatheringNodes.db.profile.AutoClear end,

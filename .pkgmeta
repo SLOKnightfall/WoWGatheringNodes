@@ -18,3 +18,4 @@ enable-nolib-creation: no
 ignore:
     - README.md
     - Libs/
+    - Localization/debug.lua
