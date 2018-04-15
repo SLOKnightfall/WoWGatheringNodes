@@ -1,12 +1,12 @@
 -- Please use the Localization App on WoWAce to Update this
 -- https://wow.curseforge.com/projects/wowgatheringnodes/localization
 
-if GetLocale() ~= rFR then return; end
+if GetLocale() ~= frFR then return; end
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
-local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "rFR")
+local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "frFR")
 if not L then return end
 
---@localization(locale="rFR", format="lua_additive_table", handle-unlocalized="comment")@
+--@localization(locale="frFR", format="lua_additive_table", handle-unlocalized="comment")@
 
 WoWGatheringNodes.NodeIdNames = {
 	[181069] =  "Grand morceau d'obsidienne",
