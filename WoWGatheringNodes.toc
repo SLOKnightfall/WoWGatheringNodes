@@ -12,7 +12,6 @@
 
 ## SavedVariables: WoWGatheringNodesConfig,
 
-
 #@no-lib-strip@
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
