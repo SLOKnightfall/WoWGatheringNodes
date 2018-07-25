@@ -1,4 +1,4 @@
---Data Retrieved on 07/24/18
+--Data Retrieved on 07/25/18
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 
 WoWGatheringNodes.Data = {
