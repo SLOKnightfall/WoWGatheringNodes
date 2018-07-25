@@ -6,7 +6,7 @@
 --			  All Rights Reserved					  --
 --///////////////////////////////////////////////////////////////////////////////////////////
 
-local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
+WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):GetLocale("WoWGatheringNodes", false)
 local GatherMate --= LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
 local Profile
@@ -153,8 +153,8 @@ function WoWGatheringNodes:OnEnable()
 		or (not IsAddOnLoaded("Gathermate2") and not IsAddOnLoaded("Gatherer")) then
 
 		--No gathering addons loaded so there is no need for tables.
-		WoWGatheringNodes.Data = {}
-		WoWGatheringNodes.NodeIdNames = {}
+		--WoWGatheringNodes.Data = {}
+		--WoWGatheringNodes.NodeIdNames = {}
 	end
 end
 

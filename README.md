@@ -1,4 +1,4 @@
-WoWGatheringNodes
+WoWGatheringNodes 
 ===
 
 WoWGatheringNodes is a data importer for both Gathermate2 and Gatherer. It currently includes up to date data points for the following objects:

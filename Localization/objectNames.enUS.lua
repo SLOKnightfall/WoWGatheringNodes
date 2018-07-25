@@ -6,7 +6,7 @@ local debug = false
 debug = true
 --@end-debug@
 
-local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
+local WoWGatheringNodes = LibStub("AceAddon-3.0"):NewAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "enUS", true, debug)
 if not L then return end
 
