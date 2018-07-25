@@ -17,5 +17,5 @@ enable-nolib-creation: no
 
 ignore:
     - README.md
-    - Libs/
+    - Libs/test.txt
     - Localization/debug.lua
