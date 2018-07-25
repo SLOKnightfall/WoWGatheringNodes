@@ -265,7 +265,7 @@ function WoWGatheringNodes:MergeData(clear,zoneFilter,nodeType, DBName)
 	for zoneID, node_table in pairs(GatherMateData[DBName]) do
 		if zoneFilter and zoneFilter[zoneID] or not zoneFilter then
 			for coord, nodeID in pairs(node_table) do
-				GatherMate:InjectNode(zoneID,coord,nodeType, nodeID)
+				GatherMate:InjectNode2(zoneID,coord,nodeType, nodeID)
 			end
 		end
 	end

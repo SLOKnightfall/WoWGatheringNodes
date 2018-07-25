@@ -29,15 +29,12 @@ Libs\AceConsole-3.0\AceConsole-3.0.xml
 Localization\objectNames.enUS.lua
 Localization\objectNames.deDE.lua
 Localization\objectNames.esES.lua
-Localization\objectNames.rFR.lua
+Localization\objectNames.frFR.lua
 Localization\objectNames.itIT.lua
 Localization\objectNames.koKr.lua
 Localization\objectNames.ptBR.lua
 Localization\objectNames.ruRU.lua
 Localization\objectNames.zhCn.lua
---@do-not-package@ 
-Localization\debug.lua
---@end-do-not-package@ 
 
 #Core
 WoWGatheringNodes.lua
