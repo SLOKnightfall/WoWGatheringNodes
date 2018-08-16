@@ -6,7 +6,7 @@ local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "rFR")
 if not L then return end
 
---@localization(locale="rFR", format="lua_additive_table", handle-unlocalized="comment")@
+--@localization(locale="frFR", format="lua_additive_table", handle-unlocalized="comment")@
 
 WoWGatheringNodes.NodeIdNames = {
 	[181069] =  "Grand morceau d'obsidienne",
@@ -585,7 +585,8 @@ WoWGatheringNodes.NodeIdNames = {
 	[13874] =  "Fleur de serpent",
 	[211474] =  "Loupiote",
 	[247988] =  "Veine de tellurium brut",
-	--	[293800] = "Evermoss",
+	--	
+	[293800] = "Evermoss",
 	[276239] = "Épine de sirène",
 	[278476] = "Zandalari Archaeology Find",
 	[293880] = "Buried Treasure Chest",
