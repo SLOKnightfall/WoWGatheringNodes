@@ -87,6 +87,28 @@ CustomNodesList = {
 		["NodeID"] = 271227,
 		["IconID"] = 19291,
 	},
+	--BfA
+	[277336] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[277336], --"Treasure Chest",
+		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Type"] = "Treasure",
+		["NodeID"] = 277336,
+		["IconID"] = 1125255,
+	},
+	[290135] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[290135], --"War Supply Chest",
+		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Type"] = "Treasure",
+		["NodeID"] = 290135,
+		["IconID"] = 19291,
+	},
+		[273900] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[273900], --"Small Treasure Chest",
+		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Type"] = "Treasure",
+		["NodeID"] = 273900,
+		["IconID"] = 1125255,
+	},
 
 }
 
@@ -139,6 +161,13 @@ function WoWGatheringNodes:OnEnable()
 
 		if Profile.InjectNodes then
 			WoWGatheringNodes:AddCustomGathermateNodes()
+			local filterOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable("GM2/Filter")
+			for x,y in pairs(filterOptions) do
+			
+			--print(x)
+			end
+			--print(filterOptions.name)
+
 		end
 
 			--if datafile matches last import version, no need to import
@@ -193,7 +222,7 @@ function WoWGatheringNodes:AddCustomGathermateNodes(reset)
 			GatherMate.reverseNodeIDs[nodeType][nodeID] = nil
 		else
 
-			GatherMate.nodeTextures[nodeType][nodeID] = GetItemIcon(data.IconID)
+			GatherMate.nodeTextures[nodeType][nodeID] = data.Icon or GetItemIcon(data.IconID)
 			GatherMate.nodeIDs[nodeType][nodeName] = nodeID
 			GatherMate.reverseNodeIDs[nodeType][nodeID] = nodeName
 			--print("injecting "..nodeName)

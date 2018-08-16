@@ -6,7 +6,29 @@ local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "deDE")
 if not L then return end
 
---@localization(locale="deDE", format="lua_additive_table", handle-unlocalized="comment")@
+--[[Translation missing --]]
+--[[ L["Clear Data"] = "Clear Data"--]] 
+--[[Translation missing --]]
+--[[ L["Clears data from memory if version has already been imported."] = "Clears data from memory if version has already been imported."--]] 
+--[[Translation missing --]]
+--[[ L["Custom Objects"] = "Custom Objects"--]] 
+--[[Translation missing --]]
+--[[ L["Enable Custom Objects"] = "Enable Custom Objects"--]] 
+--[[Translation missing --]]
+--[[ L["Failed to load WoWGatheringNodes due to "] = "Failed to load WoWGatheringNodes due to "--]] 
+--[[Translation missing --]]
+--[[ L["Import WoWGatheringNodes"] = "Import WoWGatheringNodes"--]] 
+--[[Translation missing --]]
+--[[ L["Inject %s into gathering addons"] = "Inject %s into gathering addons"--]] 
+--[[Translation missing --]]
+--[[ L["Injects new objects into Gatherer/Gathermate2 that are not currently in their data files"] = "Injects new objects into Gatherer/Gathermate2 that are not currently in their data files"--]] 
+--[[Translation missing --]]
+--[[ L["Load WoWGatheringNodes and import the data to your database."] = "Load WoWGatheringNodes and import the data to your database."--]] 
+--[[Translation missing --]]
+--[[ L["Merge will add WoWGatheringNodes to your database. Overwrite will replace your database with the data in WoWGatheringNodes"] = "Merge will add WoWGatheringNodes to your database. Overwrite will replace your database with the data in WoWGatheringNodes"--]] 
+--[[Translation missing --]]
+--[[ L["WoWGatheringNodes has been imported."] = "WoWGatheringNodes has been imported."--]] 
+
 
 WoWGatheringNodes.NodeIdNames = {
 	[181069] =  "Großer Obsidianbrocken",
@@ -585,5 +607,50 @@ WoWGatheringNodes.NodeIdNames = {
 	[245324] =  "Reiches Leysteinvorkommen",
 	[192054] =  "Ein Schwarm Mondlichtsepia",
 	[247960] =  "Kern eines Schwefelzerstörers",
+
+	--
+	[293800] = "Evermoss",
+	[276239] = "Sirenenpollen",
+	[278476] = "Zandalari Archaeology Find",
+	[293880] = "Buried Treasure Chest",
+	[278477] = "Drust Archaeology Find",
+	[276619] = "Monelitflöz",
+	[278399] = "Great Sea Catfish School",
+	[276620] = "Sturmsilberflöz",
+	[290134] = "War Supply Chest",
+	[276621] = "Reiches Monelitvorkommen",
+	[278149] = "Eisenvorkommen",
+	[281252] = "Hearthbloom",
+	[289647] = "Weathered Treasure Chest",
+	[276622] = "Reiches Sturmsilbervorkommen",
+	[278402] = "Tiragarde Perch School",
+	[276623] = "Reiches Platinvorkommen",
+	[278403] = "Slimy Mackerel School",
+	[273537] = "Gravebloom",
+	[278404] = "Redtail Loach School",
+	[273900] = "Small Treasure Chest",
+	[278405] = "Frenzied Fangtooth School",
+	[284627] = "Beached Sea Creature",
+	[278406] = "Lane Snapper School",
+	[294125] = "Ankerkraut",
+	[281494] = "Frosty Treasure Chest",
+	[276234] = "Flussknospe",
+	[288646] = "Prickly Pear",
+	[271227] = "Hidden Wyrmtongue Cache",
+	[293750] = "U'taka School",
+	[276616] = "Monelitvorkommen",
+	[278401] = "Sand Shifter School",
+	[277336] = "Treasure Chest",
+	[276237] = "Akundas Biss",
+	[276618] = "Platinvorkommen",
+	[293749] = "Rasboralus School",
+	[281872] = "Meeresstängel",
+	[276238] = "Winterkuss",
+	[281397] = "Cutwater Treasure Chest",
+	[281868] = "Sternmoos",
+	[276617] = "Sturmsilbervorkommen",
+
+
+
 }
 

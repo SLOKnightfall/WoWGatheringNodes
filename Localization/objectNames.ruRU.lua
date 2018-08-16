@@ -6,7 +6,18 @@ local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "ruRU")
 if not L then return end
 
---@localization(locale="ruRU", format="lua_additive_table", handle-unlocalized="comment")@
+L["Clear Data"] = "Очистить данные"
+L["Clears data from memory if version has already been imported."] = "Очистка данных из памяти, если версия уже импортирована."
+L["Custom Objects"] = "Пользовательский объект"
+L["Enable Custom Objects"] = "Включение пользовательских объектов"
+L["Failed to load WoWGatheringNodes due to "] = "Не удалось загрузить WoWGatheringNodes из-за"
+L["Import WoWGatheringNodes"] = "Импорт WoWGatheringNodes"
+L["Inject %s into gathering addons"] = "Ввести %s в собирательские аддоны"
+L["Injects new objects into Gatherer/Gathermate2 that are not currently in their data files"] = "Вводит новые объекты в Gatherer/Gathermate2, которые в настоящее время не находятся в файлах данных"
+L["Load WoWGatheringNodes and import the data to your database."] = "Загрузите WoWGatheringNodes и импортируйте данные в базу данных."
+L["Merge will add WoWGatheringNodes to your database. Overwrite will replace your database with the data in WoWGatheringNodes"] = "Слияние добавит WoWGatheringNodes в базу данных. Перезапись заменит базу данных данными в WoWGatheringNodes"
+L["WoWGatheringNodes has been imported."] = "WoWGatheringNodes был импортирован."
+
 
 WoWGatheringNodes.NodeIdNames = {
 	[181069] =  "Большая обсидиановая глыба",
@@ -585,5 +596,47 @@ WoWGatheringNodes.NodeIdNames = {
 	[245324] =  "Богатые залежи силового камня",
 	[191303] =  "Огница",
 	[187333] =  "Куст Кровяники",
+	--
+		[293800] = "Evermoss",
+	[276239] = "Siren's Sting",
+	[278476] = "Zandalari Archaeology Find",
+	[293880] = "Buried Treasure Chest",
+	[278477] = "Drust Archaeology Find",
+	[276619] = "Monelite Seam",
+	[278399] = "Great Sea Catfish School",
+	[276620] = "Storm Silver Seam",
+	[290134] = "War Supply Chest",
+	[276621] = "Rich Monelite Deposit",
+	[278149] = "Залежи железа",
+	[281252] = "Hearthbloom",
+	[289647] = "Weathered Treasure Chest",
+	[276622] = "Rich Storm Silver Deposit",
+	[278402] = "Tiragarde Perch School",
+	[276623] = "Rich Platinum Deposit",
+	[278403] = "Slimy Mackerel School",
+	[273537] = "Gravebloom",
+	[278404] = "Redtail Loach School",
+	[273900] = "Small Treasure Chest",
+	[278405] = "Frenzied Fangtooth School",
+	[284627] = "Beached Sea Creature",
+	[278406] = "Lane Snapper School",
+	[294125] = "Anchor Weed",
+	[281494] = "Frosty Treasure Chest",
+	[276234] = "Riverbud",
+	[288646] = "Prickly Pear",
+	[271227] = "Hidden Wyrmtongue Cache",
+	[293750] = "U'taka School",
+	[276616] = "Monelite Deposit",
+	[278401] = "Sand Shifter School",
+	[277336] = "Treasure Chest",
+	[276237] = "Akunda's Bite",
+	[276618] = "Platinum Deposit",
+	[293749] = "Rasboralus School",
+	[281872] = "Sea Stalks",
+	[276238] = "Winter's Kiss",
+	[281397] = "Cutwater Treasure Chest",
+	[281868] = "Star Moss",
+	[276617] = "Storm Silver Deposit",
+
 }
 

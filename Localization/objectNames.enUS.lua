@@ -2,15 +2,26 @@
 -- https://wow.curseforge.com/projects/wowgatheringnodes/localization
 
 local debug = false
---@debug@
+--[===[@debug@
 debug = true
---@end-debug@
+--@end-debug@]===]
 
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):NewAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):NewLocale("WoWGatheringNodes", "enUS", true, debug)
 if not L then return end
 
---@localization(locale="enUS", format="lua_additive_table")@
+L["Clear Data"] = "Clear Data"
+L["Clears data from memory if version has already been imported."] = "Clears data from memory if version has already been imported."
+L["Custom Objects"] = "Custom Objects"
+L["Enable Custom Objects"] = "Enable Custom Objects"
+L["Failed to load WoWGatheringNodes due to "] = "Failed to load WoWGatheringNodes due to "
+L["Import WoWGatheringNodes"] = "Import WoWGatheringNodes"
+L["Inject %s into gathering addons"] = "Inject %s into gathering addons"
+L["Injects new objects into Gatherer/Gathermate2 that are not currently in their data files"] = "Injects new objects into Gatherer/Gathermate2 that are not currently in their data files"
+L["Load WoWGatheringNodes and import the data to your database."] = "Load WoWGatheringNodes and import the data to your database."
+L["Merge will add WoWGatheringNodes to your database. Overwrite will replace your database with the data in WoWGatheringNodes"] = "Merge will add WoWGatheringNodes to your database. Overwrite will replace your database with the data in WoWGatheringNodes"
+L["WoWGatheringNodes has been imported."] = "WoWGatheringNodes has been imported."
+
 
 WoWGatheringNodes.NodeIdNames = {
 	[181069] =  "Large Obsidian Chunk",
@@ -589,5 +600,44 @@ WoWGatheringNodes.NodeIdNames = {
 	[248008] =  "Felwort",
 	[192054] =  "Moonglow Cuttlefish School",
 	[247960] =  "Brimstone Destroyer Core",
+	--BfA
+	[273900] =  "Small Treasure Chest",
+	[276234] =  "Riverbud",
+	[276238] =  "Winter's Kiss",
+	[278476] =  "Zandalari Archaeology Find",
+	[293880] =  "Buried Treasure Chest",
+	[278477] =  "Drust Archaeology Find",
+	[278149] =  "Iron Deposit",
+	[293800] =  "Evermoss",
+	[276616] =  "Monelite Deposit",
+	[281252] =  "Hearthbloom",
+	[278404] =  "Redtail Loach School",
+	[276622] =  "Rich Storm Silver Deposit",
+	[284627] =  "Beached Sea Creature",
+	[276237] =  "Akunda's Bite",
+	[278399] =  "Great Sea Catfish School",
+	[278402] =  "Tiragarde Perch School",
+	[276623] =  "Rich Platinum Deposit",
+	[273537] =  "Gravebloom",
+	[290135] =  "War Supply Chest",
+	[281494] =  "Frosty Treasure Chest",
+	[289647] =  "Weathered Treasure Chest",
+	[278401] =  "Sand Shifter School",
+	[277336] =  "Treasure Chest",
+	[276239] =  "Siren's Sting",
+	[288646] =  "Prickly Pear",
+	[293749] =  "Rasboralus School",
+	[281872] =  "Sea Stalks",
+	[294125] =  "Anchor Weed",
+	[276618] =  "Platinum Deposit",
+	[293750] =  "U'taka School",
+	[276621] =  "Rich Monelite Deposit",
+	[281397] =  "Cutwater Treasure Chest",
+	[278406] =  "Lane Snapper School",
+	[278403] =  "Slimy Mackerel School",
+	[281868] =  "Star Moss",
+	[278405] =  "Frenzied Fangtooth School",
+	[276619] =  "Monelite Seam",
+	[276617] =  "Storm Silver Deposit",
+	[276620] =  "Storm Silver Seam",
 }
-
