@@ -5,7 +5,7 @@
 ## X-Category: Map
 ## X-Email:
 ## Version:@project-version@
-## OptionalDeps: Gatherer, GatherMate2
+## OptionalDeps: Gatherer, GatherMate2, Carbonite
 ## X-Gatherer-Plugin-Name: WoWGatheringNodes
 ## X-Gatherer-Plugin-Type: DATABASE
 ## X-Gatherer-Plugin-DatabaseID: WoWGatheringNodes @project-date-iso@
@@ -39,6 +39,7 @@ Localization\objectNames.zhCn.lua
 #Core
 WoWGatheringNodes.lua
 WoWGatheringNodesdData.lua
+WoWGatheringNodeCatagories.lua
 
 #Files for Gathermate importing
 Gathermate_ImportConfig.lua
@@ -46,3 +47,6 @@ Gathermate_Import.lua
 
 #Files for Gatherer importing
 Gatherer_Import.lua
+
+#Files for Carbonite importing
+Carbonite_Import.lua
