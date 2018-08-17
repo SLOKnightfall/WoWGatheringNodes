@@ -5,7 +5,6 @@
 --  https://mods.curse.com/addons/wow/gathermate2
 --///////////////////////////////////////////////////////////////////////////////////////////
 
-
 if not IsAddOnLoaded("GatherMate2") then return end
 
 local GatherMate = LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
@@ -44,7 +43,9 @@ ImportHelper.expac_data = {
 	["MISTS"] = L["Mists of Pandaria"],
 	["WOD"] = L["Warlords of Draenor"],
 	["LEGION"] = L["Legion"],
+	["BFA"] = "Battle For Azeroth",
 }
+
 imported["WoWGatheringNodes_Data"] = false
 
 

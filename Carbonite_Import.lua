@@ -1,7 +1,6 @@
 --///////////////////////////////////////////////////////////////////////////////////////////
 -- Handler code for the Carbonite import process
 --///////////////////////////////////////////////////////////////////////////////////////////
-
 if not IsAddOnLoaded("Carbonite") then return end
 
 local GatherMate = LibStub("AceAddon-3.0"):GetAddon("Carbonite")
@@ -13,7 +12,7 @@ local function guidegatherConfig ()
 	if not guidegather then
 		guidegather = {
 			type = "group",
-			name = "Carbonite - Import WoWGatheringNode Data",
+			name = "Import WoWGatheringNode Data",
 			childGroups	= "tab",
 			args = {
 				gatherOpts = {
@@ -86,26 +85,21 @@ local function parseData()
 
 	for MapID, Data in pairs( WoWGatheringNodes.Data ) do
 		for NodeID, Data in pairs( Data ) do
-			--Only deal with data that Gathermate has id's for
-
-			 	--Determines which sill Gathermate classifies the node
-			 	if WoWGatheringNodes.ID_to_Catagories[NodeID] then
-				 	local placement = GatherMateSkilltoDB[WoWGatheringNodes.ID_to_Catagories[NodeID]] or "MiscDB"
-				 	--if not placement then print(type(NodeID))end
-				 	--Converts the data into a Gathermate's format
-					for _, Coords in ipairs( Data) do
-						local x ,y = WoWGatheringNodes:DecodeLoc(Coords)
-						local coords = floor( x * 100 + 0.5 ) *1000000 + floor( y * 100 + 0.5 ) *100
-						ProcessedData[placement] = ProcessedData[placement] or {}
-						ProcessedData[placement][MapID] = ProcessedData[placement][MapID] or {}
-						ProcessedData[placement][MapID][coords] = NodeID
-
-					end
+			if WoWGatheringNodes.ID_to_Catagories[NodeID] then
+				local placement = GatherMateSkilltoDB[WoWGatheringNodes.ID_to_Catagories[NodeID]] or "MiscDB"
+				for _, Coords in ipairs( Data) do
+					local x ,y = WoWGatheringNodes:DecodeLoc(Coords)
+					local coords = floor( x * 100 + 0.5 ) *1000000 + floor( y * 100 + 0.5 ) *100
+					ProcessedData[placement] = ProcessedData[placement] or {}
+					ProcessedData[placement][MapID] = ProcessedData[placement][MapID] or {}
+					ProcessedData[placement][MapID][coords] = NodeID
 				end
+			end
 		end
 	end
 end
 
+--Adds nodes not currently in Carbonite
 local M={
 	{ 1,	"inv_ore_monalite","Monelite Deposit"},
 	{ 1,	"inv_ore_monalite","Rich Monelite Deposit"},
@@ -201,7 +195,5 @@ function imp:GatherImportCarb (nodeType)
 		Nx.prt ("Imported" .. " %s " .. "nodes from WowGatheringNodes", cnt, nodeType)
 	end
 end
-
-
 
 parseData()

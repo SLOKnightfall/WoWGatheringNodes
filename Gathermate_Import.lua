@@ -264,6 +264,8 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 			filter = wodZones
 		elseif zoneFilter == "LEGION" then
 			filter = legionZones
+		elseif zoneFilter == "BFA" then
+			filter = bfaZones
 		end
 	end
 	if dbs["Mines"]    then self:MergeData(style ~= "Merge",filter,"Mining","MineDB" ) end
