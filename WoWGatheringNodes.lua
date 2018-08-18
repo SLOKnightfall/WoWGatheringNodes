@@ -122,7 +122,6 @@ function WoWGatheringNodes:addCustomNodesToOptions(objectData)
 		width = "full",
 		set = function(info,val) Profile.CustomNodes[objectData.Name] = val; WoWGatheringNodes:toggleCustomNodes() end,
 		get = function(info) return Profile.CustomNodes[objectData.Name] end,
-
 	}
 end
 
