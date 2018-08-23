@@ -127,25 +127,7 @@ WoWGatheringNodes_Op = {
 			desc = LL["Load WoWGatheringNodes and import the data to your database."],
 			type = "execute",
 			func = function()
-				local loaded, reason = LoadAddOn("WoWGatheringNodes")
-				--print(LoadAddOn("WoWGatheringNodes"))
-				local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
-				if loaded and WoWGatheringNodes.generatedVersion then
-					local dataVersion = tonumber(WoWGatheringNodes.generatedVersion:match("%d+"))
-					local filter = nil
-					if db.importers["WoWGatheringNodes"].expacOnly then
-						filter = db.importers["WoWGatheringNodes"].expac
-					end
-					WoWGatheringNodes:PerformMerge(db.importers["WoWGatheringNodes"].Databases,db.importers["WoWGatheringNodes"].Style,filter)
-					WoWGatheringNodes:CleanupImportData()
-					print(LL["WoWGatheringNodes has been imported."])
-					Config:SendMessage("GatherMate2ConfigChanged")
-					db["importers"]["WoWGatheringNodes"]["lastImport"] = dataVersion
-					imported["WoWGatheringNodes"] = true
-					GatherMate:RemoveDepracatedNodes()
-				else
-					print(LL["Failed to load WoWGatheringNodes due to "]..reason)
-				end
+				WoWGatheringNodes:ImportGathermate()
 			end,
 			disabled = function()
 				local cm = 0
@@ -163,3 +145,25 @@ WoWGatheringNodes_Op = {
 }
 
 Config:RegisterImportModule("WoWGatheringNodes", WoWGatheringNodes_Op)
+
+function WoWGatheringNodes:ImportGathermate()
+	local loaded, reason = LoadAddOn("WoWGatheringNodes")
+	--print(LoadAddOn("WoWGatheringNodes"))
+	local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
+	if loaded and WoWGatheringNodes.generatedVersion then
+		local dataVersion = tonumber(WoWGatheringNodes.generatedVersion:match("%d+"))
+		local filter = nil
+		if db.importers["WoWGatheringNodes"].expacOnly then
+			filter = db.importers["WoWGatheringNodes"].expac
+		end
+		WoWGatheringNodes:PerformMerge(db.importers["WoWGatheringNodes"].Databases,db.importers["WoWGatheringNodes"].Style,filter)
+		WoWGatheringNodes:CleanupGathermateImportData()
+		print(LL["WoWGatheringNodes has been imported."])
+		Config:SendMessage("GatherMate2ConfigChanged")
+		db["importers"]["WoWGatheringNodes"]["lastImport"] = dataVersion
+		imported["WoWGatheringNodes"] = true
+		GatherMate:RemoveDepracatedNodes()
+	else
+		print(LL["Failed to load WoWGatheringNodes due to "]..reason)
+	end
+end

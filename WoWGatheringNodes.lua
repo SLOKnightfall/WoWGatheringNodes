@@ -26,8 +26,12 @@ local defaults = {
 	profile = {
 		GathermateImport = false,
 		GathererImport = false,
+		CarboniteImport = false,
 		InjectNodes = true,
 		AutoClear = false,
+		AutoImportGathermate = true,
+		AutoImportCarboniteHerbs = true,
+		AutoImportCarboniteMines = true,
 		CustomNodes = {
 			['*'] = true,
 		},
@@ -53,6 +57,54 @@ local myOptionsTable = {
 			set = function(info,val) WoWGatheringNodes.db.profile.InjectNodes = val;WoWGatheringNodes:toggleCustomNodes(not val) end,
 			get = function(info) return WoWGatheringNodes.db.profile.InjectNodes end,
 		},
+		autoImport={
+			name = L["Auto Import New Data"],
+			type = "group",
+			width = "full",
+			args={
+				GathermateHeader = {
+					name = "Gathermate",
+					type = "header",
+					order = 0, 
+				},
+				GathermateImport = {
+					name = L["Auto Import Data to Gathermate"],
+					--desc = L["Automaticaly imports data when updated data is found"],
+					type = "toggle",
+					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportGathermate = val end,
+					get = function(info) return WoWGatheringNodes.db.profile.AutoImportGathermate end,
+					disabled = function() return not IsAddOnLoaded("Gathermate2") end,
+					order = 1,
+					width = "full",
+				},
+				CarboniteHeader = {
+					name = "Carbonite",
+					type = "header",
+					order = 2,
+				},	 
+				CarboniteMineImport = {
+					name = L["Auto Import to Mine Data to Carbonite"],
+					--desc = L["Automaticaly imports data when updated data is found"],
+					type = "toggle",
+					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportCarboniteMines = val end,
+					get = function(info) return WoWGatheringNodes.db.profile.AutoImportCarboniteMines end,
+					disabled = function() return not IsAddOnLoaded("Carbonite") end,
+					order = 3,
+					width = "full",
+				},
+				CarboniteHerbImport = {
+					name = L["Auto Import to Herb Data to Carbonite"],
+					--desc = L["Automaticaly imports data when updated data is found"],
+					type = "toggle",
+					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportCarboniteHerbs = val end,
+					get = function(info) return WoWGatheringNodes.db.profile.AutoImportCarboniteHerbs end,
+					disabled = function() return not IsAddOnLoaded("Carbonite") end,
+					order = 4, 
+					width = "full",
+				},
+			},
+		},
+
 		customNodeList={
 			name = L["Custom Objects"],
 			type = "group",
@@ -97,7 +149,7 @@ CustomNodesList = {
 	},
 	[290135] = {
 		["Name"] = WoWGatheringNodes.NodeIdNames[290135], --"War Supply Chest",
-		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Icon"] = icon_path,--.."Treasure\\footlocker.tga",
 		["Type"] = "Treasure",
 		["NodeID"] = 290135,
 		["IconID"] = 19291,
@@ -152,33 +204,49 @@ function WoWGatheringNodes:OnEnable()
 
 		if Profile.InjectNodes then
 				WoWGatheringNodes:AddCustomGathererNodes()
-			end
 		end
+
+		if Profile.GathererImport ~= WoWGatheringNodes.generatedVersion and Profile.AutoImport then
+		else
+		end
+	end
 
 	if IsAddOnLoaded("Gathermate2") then
 		GatherMate = LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
-
 		if Profile.InjectNodes then
 			WoWGatheringNodes:AddCustomGathermateNodes()
-			local filterOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable("GM2/Filter")
-			for x,y in pairs(filterOptions) do
-			
+			--local filterOptions = LibStub("AceDBOptions-3.0"):GetOptionsTable("GM2/Filter")
+			--for x,y in pairs(filterOptions) do
 			--print(x)
-			end
-			--print(filterOptions.name)
+			--end
 
 		end
 
-			--if datafile matches last import version, no need to import
-		if Profile.GathermateImport ~= WoWGatheringNodes.generatedVersion then
-		else
+		--if datafile matches last import version, no need to import
+		if Profile.GathermateImport ~= WoWGatheringNodes.generatedVersion and Profile.AutoImportGathermate then
+			WoWGatheringNodes:ImportGathermate()
+		--else
+		end
+	end
+
+	if IsAddOnLoaded("Carbonite") then
+		if Profile.CarboniteImport ~= WoWGatheringNodes.generatedVersion  then
+		
+			if Profile.AutoImportCarboniteHerbs then
+				WoWGatheringNodes:GatherImportCarb("NXHerb")
+			end
+			
+			if Profile.AutoImportCarboniteMines then
+				WoWGatheringNodes:GatherImportCarb("NXMine")
+				
+			end
 		end
 	end
 
 	if ((Profile.GathermateImport == WoWGatheringNodes.generatedVersion
 			or Profile.GathererImport == WoWGatheringNodes.generatedVersion)
 			and Profile.AutoClear)
-		or (not IsAddOnLoaded("Gathermate2") and not IsAddOnLoaded("Gatherer")) then
+		or (not IsAddOnLoaded("Gathermate2") and not IsAddOnLoaded("Gatherer") and not IsAddOnLoaded("Carbonite")) then
 
 		--No gathering addons loaded so there is no need for tables.
 		--WoWGatheringNodes.Data = {}

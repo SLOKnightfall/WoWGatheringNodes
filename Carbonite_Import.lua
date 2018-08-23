@@ -6,7 +6,7 @@ if not IsAddOnLoaded("Carbonite") then return end
 local GatherMate = LibStub("AceAddon-3.0"):GetAddon("Carbonite")
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local L = LibStub("AceLocale-3.0"):GetLocale("Carbonite")
-local imp = {}
+
 local guidegather
 local function guidegatherConfig ()
 	if not guidegather then
@@ -30,8 +30,8 @@ local function guidegatherConfig ()
 							type = "execute",
 							width = "full",
 							name = "Import Herbs From WowGatheringNodes",
-							func = function ()
-								imp:GatherImportCarb ("NXHerb")
+							func = function()
+								WoWGatheringNodes:GatherImportCarb("NXHerb")
 							end,
 						},
 						CmdImportMine = {
@@ -39,8 +39,8 @@ local function guidegatherConfig ()
 							type = "execute",
 							width = "full",
 							name = "Import Mines From WowGatheringNodes",
-							func = function ()
-								imp:GatherImportCarb ("NXMine")
+							func = function()
+								WoWGatheringNodes:GatherImportCarb("NXMine")
 							end,
 						},
 						CmdImportMisc = {
@@ -48,7 +48,7 @@ local function guidegatherConfig ()
 							type = "execute",
 							width = "full",
 							name = "Import Misc From WowGatheringNodes",
-							func = function ()
+							func = function()
 								Nx.Opts:NXCmdImportCarbMisc()
 							end,
 							hidden = true,
@@ -101,29 +101,30 @@ end
 
 --Adds nodes not currently in Carbonite
 local M={
-	{ 1,	"inv_ore_monalite","Monelite Deposit"},
-	{ 1,	"inv_ore_monalite","Rich Monelite Deposit"},
-	{ 1,	"inv_ore_monalite","Monelite Seam"},
-	{ 1,	"inv_ore_platinum","Platinum Deposit"},
-	{ 1,	"inv_ore_platinum","Rich Platinum Deposit"},
-	{ 1,	"inv_ore_stormsilver","Storm Silver Deposit"},
-	{ 1,	"inv_ore_stormsilver","Rich Storm Silver Deposit"},
-	{ 1,	"inv_ore_stormsilver","Storm Silver Seam"},
+	{ 1,	"inv_ore_monalite",WoWGatheringNodes.NodeIdNames[276616]},
+	{ 1,	"inv_ore_monalite",WoWGatheringNodes.NodeIdNames[276621]},
+	{ 1,	"inv_ore_monalite",WoWGatheringNodes.NodeIdNames[276619]},
+	{ 1,	"inv_ore_platinum",WoWGatheringNodes.NodeIdNames[276618]},
+	{ 1,	"inv_ore_platinum",WoWGatheringNodes.NodeIdNames[276623]},
+	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276617]},
+	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276622]},
+	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276620]},
 }
 
 local H = {
-	{ 1,	"inv_misc_herb_akundasbite","Akunda's Bite"},
-	{ 1,	"inv_misc_herb_anchorweed","Anchor Weed"},
-	{ 1,	"inv_misc_herb_riverbud","Riverbud"},
-	{ 1,	"inv_misc_herb_seastalk","Sea Stalks"},
-	--{ 700,	"inv_ore_platinum","Siren's Sting"},
-	{ 1,	"inv_misc_herb_starmoss","Star Moss"},
-	{ 1,	"inv_misc_herb_winterskiss","Winter's Kiss"},
+	{ 1,	"inv_misc_herb_akundasbite",WoWGatheringNodes.NodeIdNames[276237]},
+	{ 1,	"inv_misc_herb_anchorweed",WoWGatheringNodes.NodeIdNames[276242]},
+	{ 1,	"inv_misc_herb_riverbud",WoWGatheringNodes.NodeIdNames[276234]},
+	{ 1,	"inv_misc_herb_seastalk",WoWGatheringNodes.NodeIdNames[276240]},
+	{ 1,	"inv_misc_herb_pollen",WoWGatheringNodes.NodeIdNames[281869]},
+	{ 1,	"inv_misc_herb_starmoss",WoWGatheringNodes.NodeIdNames[281868]},
+	{ 1,	"inv_misc_herb_winterskiss",WoWGatheringNodes.NodeIdNames[276238]},
 }
 
+--Map for nodeID to CarboniteID
 local ID_to_CarboniteID = {
 		[209349] = 58,
-		[1610] = 7,
+		[202751] = 55,
 		[181108] = 21,
 		[237400] = 68,
 		[202752] = 54,
@@ -135,11 +136,11 @@ local ID_to_CarboniteID = {
 		[176584] = 8,
 		[241641] = 75,
 		[181270] = 12,
-		[181557] = 10,
+		[237402] = 65,
 		[228573] = 65,
 		[1617] = 34,
 		[272778] = 51,
-		[189973] = 41,
+		[209353] = 59,
 		[1618] = 30,
 		[228574] = 66,
 		[176586] = 26,
@@ -158,7 +159,7 @@ local ID_to_CarboniteID = {
 		[176588] = 20,
 		[1623] = 38,
 		[237406] = 67,
-		[123310] = 13,
+		[1624] = 22,
 		[253280] = 48,
 		[176589] = 3,
 		[181275] = 33,
@@ -167,167 +168,166 @@ local ID_to_CarboniteID = {
 		[241743] = 44,
 		[1628] = 18,
 		[2866] = 13,
-		[177388] = 16,
+		[165658] = 4,
 		[190170] = 42,
 		[181277] = 37,
 		[189979] = 23,
 		[276616] = 53,
-		[276234] = 80,
+		[281079] = 82,
 		[190171] = 46,
-		[181278] = 1,
+		[276617] = 58,
 		[189980] = 24,
 		[276618] = 56,
+		[276236] = 82,
 		[190172] = 47,
 		[181279] = 27,
 		[189981] = 25,
 		[276237] = 78,
 		[276620] = 60,
 		[276238] = 83,
-		[221538] = 33,
-		[181280] = 29,
+		[190173] = 44,
+		[244775] = 72,
 		[276622] = 59,
+		[276240] = 81,
 		[221539] = 34,
-		[181281] = 25,
-		[190175] = 44,
+		[244776] = 72,
+		[276242] = 79,
+		[221540] = 38,
 		[244777] = 74,
 		[181569] = 15,
-		[228510] = 39,
 		[142140] = 32,
-		[230428] = 40,
-		[276623] = 57,
 		[221541] = 37,
 		[244778] = 76,
 		[181570] = 15,
 		[243312] = 43,
 		[142141] = 2,
 		[191133] = 26,
-		[209328] = 34,
 		[221542] = 58,
-		[235376] = 64,
+		[181248] = 3,
+		[202736] = 27,
 		[243313] = 42,
+		[230428] = 40,
 		[142142] = 36,
 		[247999] = 73,
-		[1735] = 9,
+		[276623] = 57,
 		[221543] = 59,
-		[202751] = 55,
+		[241726] = 47,
 		[202737] = 31,
 		[243314] = 41,
-		[209329] = 36,
+		[181281] = 25,
 		[142143] = 4,
 		[248000] = 73,
 		[185557] = 2,
 		[221544] = 61,
-		[276621] = 54,
-		[228493] = 41,
-		[243315] = 39,
-		[255344] = 45,
+		[190175] = 44,
+		[202738] = 29,
+		[206085] = 44,
+		[202750] = 53,
 		[142144] = 15,
 		[248001] = 73,
-		[209350] = 61,
-		[2653] = 12,
-		[232542] = 42,
+		[244774] = 71,
+		[221545] = 57,
+		[185877] = 14,
 		[202739] = 28,
-		[241726] = 47,
-		[181271] = 9,
+		[1735] = 9,
+		[221538] = 33,
 		[142145] = 19,
 		[248002] = 73,
-		[209351] = 62,
-		[206085] = 44,
+		[232542] = 42,
+		[276234] = 80,
 		[232543] = 43,
 		[202740] = 32,
 		[233117] = 64,
-		[202736] = 27,
-		[237402] = 65,
+		[2653] = 12,
+		[181557] = 10,
 		[248003] = 73,
-		[181555] = 5,
+		[191019] = 43,
 		[237357] = 39,
 		[232544] = 41,
 		[202741] = 30,
-		[235388] = 65,
-		[181166] = 5,
-		[209353] = 59,
+		[281867] = 82,
+		[209354] = 57,
+		[228493] = 41,
 		[248004] = 73,
 		[281868] = 82,
 		[237358] = 41,
 		[232545] = 39,
-		[202738] = 29,
-		[209354] = 57,
-		[123309] = 21,
-		[202747] = 51,
+		[202749] = 50,
+		[252404] = 73,
+		[221547] = 56,
+		[190176] = 48,
 		[248005] = 73,
-		[1624] = 22,
+		[281870] = 80,
 		[237359] = 42,
-		[2040] = 13,
+		[244786] = 73,
 		[181068] = 18,
 		[189978] = 22,
-		[165658] = 4,
+		[202748] = 52,
 		[2041] = 23,
 		[248006] = 73,
 		[281872] = 81,
 		[237360] = 43,
 		[2042] = 11,
 		[181069] = 11,
-		[276617] = 58,
+		[276621] = 54,
 		[228563] = 42,
 		[2043] = 21,
 		[248007] = 73,
-		[276619] = 55,
+		[235376] = 64,
 		[209311] = 33,
 		[2044] = 39,
-		[278149] = 9,
-		[185877] = 14,
-		[228564] = 43,
+		[185881] = 28,
 		[2045] = 35,
+		[228564] = 43,
+		[181166] = 5,
 		[248008] = 73,
-		[252404] = 73,
+		[243315] = 39,
 		[209312] = 35,
 		[2046] = 17,
-		[190173] = 44,
+		[181278] = 1,
 		[191303] = 49,
-		[209330] = 38,
+		[189973] = 41,
 		[2047] = 21,
 		[248009] = 73,
-		[235391] = 68,
+		[202747] = 51,
 		[209313] = 37,
-		[181249] = 20,
+		[181271] = 9,
 		[235387] = 69,
-		[244776] = 72,
-		[221540] = 38,
-		[190176] = 48,
+		[181280] = 29,
+		[228510] = 39,
+		[235391] = 68,
 		[248010] = 73,
-		[221545] = 57,
+		[181249] = 20,
 		[1731] = 3,
 		[237396] = 69,
-		[202748] = 52,
+		[235388] = 65,
 		[214510] = 60,
 		[1732] = 20,
-		[191019] = 43,
+		[2040] = 13,
 		[248011] = 73,
-		[221547] = 56,
+		[1610] = 7,
 		[1733] = 17,
-		[235390] = 67,
-		[202749] = 50,
+		[209351] = 62,
 		[235389] = 66,
+		[276619] = 55,
 		[1734] = 6,
 		[324] = 19,
 		[248012] = 73,
-		[185881] = 28,
+		[209350] = 61,
 		[272768] = 50,
 		[237398] = 64,
-		[202750] = 53,
+		[235390] = 67,
 		[294125] = 79,
-		[123848] = 19,
-		[244774] = 71,
-		[244775] = 72,
-		[244786] = 73,
-		[181248] = 3,
-}
-
-
+		[255344] = 45,
+		[209328] = 34,
+		[209329] = 36,
+		[209330] = 38,
+		[181555] = 5,
+	}
 
 
 --Adds new nodes to carbonite
-function injectnode()
+local function injectCarboniteNodes()
 	for _,data in ipairs(M) do	
 		local name = data[3]
 			if not Nx:MineNameToId (name) then
@@ -343,13 +343,11 @@ function injectnode()
 			Nx.db.profile.Guide.ShowHerbs[Nx:HerbNameToId (name)] = true
 		end
 	end
-
 end
 
-injectnode()
+injectCarboniteNodes()
 
-
-function imp:GatherImportCarb (nodeType)
+function WoWGatheringNodes:GatherImportCarb(nodeType)
 	if nodeType == "NXMine" then
 		if not ProcessedData.MineDB then
 			Nx.prt ("WowGatheringNodes Not Loaded!")
@@ -378,10 +376,13 @@ function imp:GatherImportCarb (nodeType)
 
 	local cnt = 0
 	if srcT then
+	local count = 0
 		for mapId, zoneT in pairs (srcT) do
 			for coords, nodeId in pairs(zoneT) do
+			count = count+ 1
 				local nx, ny = Nx:GatherConvert(coords)
 				local name = WoWGatheringNodes.NodeIdNames[nodeId]
+				--print(name)
 				local convId = nil
 				if ntp == "M"  and name then
 					convId = ID_to_CarboniteID[nodeId]
@@ -389,16 +390,61 @@ function imp:GatherImportCarb (nodeType)
 				if ntp == "H"  and name then
 					convId = ID_to_CarboniteID[nodeId]
 				end
-				
+				--if nodeId == 175404 then print("RTT") end
 				if nx and ny and convId then
 					Nx:Gather (nodeType, convId, mapId, nx * 100, ny * 100)
 					cnt = cnt + 1
+				else 
+				--print(name)
 				end
 			end
 		end
 
 		Nx.prt ("Imported" .. " %s " .. "nodes from WowGatheringNodes", cnt, nodeType)
+		self.db.profile.CarboniteImport = WoWGatheringNodes.generatedVersion
 	end
 end
 
 parseData()
+
+--@do-not-package@ 
+--Builds a list of nodeIDs with the matching CarboniteID's
+function GenerateIDs()
+	WoWGatheringNodesConfig.carb = {}
+	local carbid = {}
+	local gmid = {}
+
+	for index, data in ipairs(Nx.GatherInfo["H"]) do
+
+		local name = data[3]
+		local id = data[1]
+		--print(name)
+		carbid[name] = index
+
+
+	end
+
+	for index, data in ipairs(Nx.GatherInfo["M"]) do
+
+		local name = data[3]
+		local id = data[1]
+		--print(index)
+		carbid[name] = index
+
+
+	end
+
+	for id, name in pairs(WoWGatheringNodes.NodeIdNames) do
+		if carbid[name] then 
+			gmid[id] = carbid[name]
+		else 
+		--print(name)
+
+		end
+
+	end
+WoWGatheringNodesConfig.carb = gmid
+
+
+end
+ --@end-do-not-package@

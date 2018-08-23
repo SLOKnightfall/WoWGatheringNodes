@@ -554,14 +554,14 @@ for skill, data in pairs(GM_Node_Ids) do
 		local nodeID = data.NodeID
 		local nodeName = data.Name
 		id_to_skill[nodeID] = data.Type
-		NodeID_to_GathermateID[nodeID] =nodeID
+		NodeID_to_GathermateID[nodeID] = nodeID
 	end
 end
 
 --- Parses node data into the format required by Gathermate to be imported
-local function parseGathermateData()
+function WoWGatheringNodes:parseGathermateData()
 	foo = missing_Nodes
-	local ProcessedData = GatherMateData
+	local ProcessedData = {} --GatherMateData
 	ProcessedData.HerbDB = {}
 	ProcessedData.MineDB = {}
 	ProcessedData.FishDB = {}
@@ -591,6 +591,8 @@ local function parseGathermateData()
 			end
 		end
 	end
+
+	return ProcessedData
 end
 
 
@@ -599,7 +601,7 @@ end
 --pram: syle  "Merge" will combine new data with current data,  any other value will overwrite
 --pram:  zoneFilter  determines if only sdata from pecific zones are to be used
 function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
-	parseGathermateData()
+	GatherMateData = WoWGatheringNodes:parseGathermateData()
 	local filter = nil
 	if zoneFilter and type(zoneFilter) == "string" then
 		if zoneFilter == "TBC" then
@@ -618,6 +620,7 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 			filter = bfaZones
 		end
 	end
+
 	if dbs["Mines"]    then self:MergeData(style ~= "Merge",filter,"Mining","MineDB" ) end
 	if dbs["Herbs"]    then self:MergeData(style ~= "Merge",filter, "Herb Gathering","HerbDB") end
 	if dbs["Fish"]     then self:MergeData(style ~= "Merge",filter, "Fishing", "FishDB") end
@@ -626,8 +629,7 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 	if dbs["Gases"] then self:MergeData(style ~= "Merge",filter, "Extract Gas", "GasDB") end
 	if dbs["Logging"] then self:MergeData(style ~= "Merge",filter, "Logging", "LoggingDB") end
 
-
-	self:CleanupImportData()
+	self:CleanupGathermateImportData()
 	GatherMate:SendMessage("WoWGatheringNodesData2Import")
 	self.db.profile.GathermateImport = WoWGatheringNodes.generatedVersion
 end
@@ -649,6 +651,6 @@ function WoWGatheringNodes:MergeData(clear,zoneFilter,nodeType, DBName)
 end
 
 
-function WoWGatheringNodes:CleanupImportData()
+function WoWGatheringNodes:CleanupGathermateImportData()
 	GatherMateData = nil
 end
