@@ -32,7 +32,6 @@ L["Auto Import to Data Gathermate"] = "Auto Import Data to Gathermate"
  --@end-do-not-package@
 
 WoWGatheringNodes.NodeIdNames = {}
-
 WoWGatheringNodes.NodeIdNames[252836] =  "Small Treasure Chest"
 WoWGatheringNodes.NodeIdNames[244904] =  "Small Treasure Chest"
 WoWGatheringNodes.NodeIdNames[284469] =  "Small Treasure Chest"
