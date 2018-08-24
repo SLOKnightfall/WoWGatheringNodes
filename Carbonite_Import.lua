@@ -343,6 +343,9 @@ local function injectCarboniteNodes()
 			Nx.db.profile.Guide.ShowHerbs[Nx:HerbNameToId (name)] = true
 		end
 	end
+
+	--Fix for missing mageroyal icon
+	Nx.GatherInfo["H"][24][2] = "Inv_jewelry_talisman_03"
 end
 
 injectCarboniteNodes()
