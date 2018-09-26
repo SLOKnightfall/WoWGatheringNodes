@@ -131,7 +131,7 @@ local myOptionsTable = {
 --local icon_path = "Interface\\AddOns\\GatherMate2\\Artwork\\"
 local icon_path = "Interface\\Worldmap\\TreasureChest_64"
 -- Table with hard coded custom object data
-CustomNodesList = {
+WoWGatheringNodes.CustomNodesList = {
 	[271227] = {
 		["Name"] = WoWGatheringNodes.NodeIdNames[271227], --"Hidden Wyrmtongue Cache",
 		["Icon"] = icon_path,--.."Treasure\\footlocker.tga",
@@ -188,7 +188,7 @@ function WoWGatheringNodes:OnInitialize()
 	Profile = WoWGatheringNodes.db.profile
 
 	--Adds custom objects to the options table
-	for nodeID, objectData in pairs(CustomNodesList) do
+	for nodeID, objectData in pairs(WoWGatheringNodes.CustomNodesList ) do
 		WoWGatheringNodes:addCustomNodesToOptions(objectData)
 	end
 end
@@ -278,22 +278,33 @@ end
 --- Cycles through the custom node list and injects data into Gethermate2
 --pram: reset  If true, removes the injected data
 function WoWGatheringNodes:AddCustomGathermateNodes(reset)
-	for nodeID, data in pairs(CustomNodesList) do
+	
+	for nodeID, data in pairs(WoWGatheringNodes.CustomNodesList ) do
 		local nodeName = WoWGatheringNodes.NodeIdNames[nodeID] --data.Name
 		local nodeType = data.Type
+		local NL = LibStub("AceLocale-3.0"):GetLocale("GatherMate2Nodes")
 
 		if reset or not Profile.CustomNodes[nodeName] then
 			--print("clearing")
 			GatherMate.nodeTextures[nodeType][nodeID] = nil
 			GatherMate.nodeIDs[nodeType][nodeName] = nil
 			GatherMate.reverseNodeIDs[nodeType][nodeID] = nil
+			NL[nodeName] = nil
 		else
-
 			GatherMate.nodeTextures[nodeType][nodeID] = data.Icon or GetItemIcon(data.IconID)
 			GatherMate.nodeIDs[nodeType][nodeName] = nodeID
 			GatherMate.reverseNodeIDs[nodeType][nodeID] = nodeName
+			--print(("inj: %s"):format(nodeName))
+			NL[nodeName] = true
+			
 			--print("injecting "..nodeName)
 		end
+	end
+	if reset then 
+
+		WoWGatheringNodes:RoutesHook(false)
+	else
+		WoWGatheringNodes:RoutesHook(true)
 	end
 end
 
@@ -301,7 +312,7 @@ end
 --- Cycles through the custom node list and injects data into Gatherer
 --pram: reset  If true, removes the injected data
 function WoWGatheringNodes:AddCustomGathererNodes(reset)
-	for nodeID, data in pairs(CustomNodesList) do
+	for nodeID, data in pairs(WoWGatheringNodes.CustomNodesList ) do
 		local icon_path = data.Icon
 		local nodeName = WoWGatheringNodes.NodeIdNames[nodeID] --data.Name
 		local nodeType = data.Type
@@ -349,5 +360,49 @@ function WoWGatheringNodes:AddCustomGathererNodes(reset)
 	--Overwrites the standard gatherer function to use the new table with injected names, should really hook-redirect
 	function Gatherer.Util.GetNodeName(objectID)
 		return nodeNames[objectID] or ("Unknown: "..objectID)
+	end
+end
+
+
+--Fix for routes issue where it does not recognize ijected items
+local translate_db_type = {
+	["Herb Gathering"] = "Herbalism",
+	["Mining"] = "Mining",
+	["Fishing"] = "Fishing",
+	["Extract Gas"] = "ExtractGas",
+	["Treasure"] = "Treasure",
+	["Archaeology"] = "Archaeology",
+	["Logging"] = "Logging",
+}
+
+local function Gathermate_AppendNodes(node_list, zone, db_type, node_type)
+	--return hook.hooks[Routes.plugins["GatherMate2"]]["AppendNodes"](node_list, zone, db_type, node_type)
+	--node_type = tonumber(node_type)
+	--local english_node, localized_node, type = hook.hooks[Routes.plugins["GatherMate2"]]["AppendNodes"](node_list, zone, db_type, node_type)
+	local english_node, localized_node, type = Routes_hook(node_list, zone, db_type, node_type)
+	node_type = tonumber(node_type)
+	if WoWGatheringNodes.CustomNodesList[node_type] then 
+	
+		english_node = WoWGatheringNodes.NodeIdNames[node_type]
+		localized_node = WoWGatheringNodes.NodeIdNames[node_type]
+		type = translate_db_type[db_type]
+	end
+
+	return english_node, localized_node, type
+
+end
+
+local Routes_hook 
+
+if IsAddOnLoaded("Routes") then 
+	Routes_hook = Routes.plugins["GatherMate2"]["AppendNodes"]
+end
+
+function WoWGatheringNodes:RoutesHook(reset)
+	if not IsAddOnLoaded("Routes") then return end
+	if reset then 
+		Routes.plugins["GatherMate2"]["AppendNodes"] = Routes_hook
+	else
+		Routes.plugins["GatherMate2"]["AppendNodes"] = Gathermate_AppendNodes
 	end
 end
