@@ -161,6 +161,48 @@ WoWGatheringNodes.CustomNodesList = {
 		["NodeID"] = 273900,
 		["IconID"] = 1125255,
 	},
+	[322413] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[322413], --"Glimmering Chest",
+		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Type"] = "Treasure",
+		["NodeID"] = 322413,
+		["IconID"] = 1125255,
+	},
+	[325659] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[325659], --"Mechanized Chest",
+		["Icon"] = "Interface\\AddOns\\GatherMate2\\Artwork\\Treasure\\treasure.tga",--.."Treasure\\footlocker.tga",
+		["Type"] = "Treasure",
+		["NodeID"] = 325659,
+		["IconID"] = 1125255,
+	},
+	[325875] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[325875], --"Osmenite Deposit",
+		["Icon"] = "Interface\\ICONS\\Inv_ore_osmenite",--.."Treasure\\footlocker.tga",
+		["Type"] = "Mining",
+		["NodeID"] = 325875,
+		["IconID"] = 2543233,
+	},
+		[325873] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[325873], --"] =  "Rich Osmenite Deposit",
+		["Icon"] = "Interface\\ICONS\\Inv_ore_osmenite",--.."Treasure\\footlocker.tga",
+		["Type"] = "Mining",
+		["NodeID"] = 325873,
+		["IconID"] = 2543233,
+	},
+		[325874] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[325874], --"Osmenite Seam",
+		["Icon"] = "Interface\\ICONS\\Inv_ore_osmenite",--.."Treasure\\footlocker.tga",
+		["Type"] = "Mining",
+		["NodeID"] = 325874,
+		["IconID"] = 2543233,
+	},
+	[326598] = {
+		["Name"] = WoWGatheringNodes.NodeIdNames[326598], --"Zin'anthid ",
+		["Icon"] = "Interface\\ICONS\\inv_misc_herb_zoanthid",--.."Treasure\\footlocker.tga",
+		["Type"] = "Herb Gathering",
+		["NodeID"] = 326598,
+		["IconID"] = 2563958,
+	},
 
 }
 

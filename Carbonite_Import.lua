@@ -109,6 +109,9 @@ local M={
 	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276617]},
 	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276622]},
 	{ 1,	"inv_ore_stormsilver",WoWGatheringNodes.NodeIdNames[276620]},
+	{ 1,	"inv_ore_osmenite",WoWGatheringNodes.NodeIdNames[325875]},
+	{ 1,	"inv_ore_osmenite",WoWGatheringNodes.NodeIdNames[325873]},
+	{ 1,	"inv_ore_osmenite",WoWGatheringNodes.NodeIdNames[325874]},
 }
 
 local H = {
@@ -119,6 +122,7 @@ local H = {
 	{ 1,	"inv_misc_herb_pollen",WoWGatheringNodes.NodeIdNames[281869]},
 	{ 1,	"inv_misc_herb_starmoss",WoWGatheringNodes.NodeIdNames[281868]},
 	{ 1,	"inv_misc_herb_winterskiss",WoWGatheringNodes.NodeIdNames[276238]},
+	{ 1,	"inv_misc_herb_zoanthid",WoWGatheringNodes.NodeIdNames[326598]},
 }
 
 --Map for nodeID to CarboniteID

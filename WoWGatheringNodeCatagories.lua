@@ -3,6 +3,9 @@ local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 
 WoWGatheringNodes.Catagories = {
 	["mining-nodes"] = {
+		[325875] = "Osmenite Deposit",
+		[325874] = "Osmenite Seam",
+		[325873] = "Rich Osmenite Deposit",
 		[1610] = "Incendicite Mineral Vein",
 		[247918] = "Stormy Leystone Deposit",
 		[193954] = "Rich Saronite Deposit",
@@ -184,6 +187,8 @@ WoWGatheringNodes.Catagories = {
 		[203298] = "Copper Vein",
 	},
 	["treasure-objects"] = {
+		[322413] = "Glimmering Chest",
+		[325659] = "Mechanized Chest",
 		[232219] = "Ogre Booty",
 		[252807] = "Small Treasure Chest",
 		[233626] = "Grizzlemaw's Bonepile",
@@ -1020,6 +1025,7 @@ WoWGatheringNodes.Catagories = {
 		[233132] = "Freshwater Clam",
 	},
 	["herb-objects"] = {
+		[326598] = "Zin'anthid",
 		[208544] = "Magmolia",
 		[248019] = "Lively Aethril",
 		[181270] = "Felweed",

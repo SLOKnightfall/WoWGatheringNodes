@@ -23,7 +23,7 @@ local ipairs = _G.ipairs
 
 WoWGatheringNodes.generatedVersion = GetAddOnMetadata("WoWGatheringNodes", "X-Gatherer-Plugin-DatabaseID")
 
-local NodeID_to_GathermateID = {
+NodeID_to_GathermateID = {
 	[181069] = 225,
 	[252807] = 273900,
 	[2040] = 206,
@@ -857,8 +857,29 @@ local NodeID_to_GathermateID = {
 	[181556] = 222,
 	[207539] = 536,
 	[278406] = 190,
-}
 
+	--"Mechanized Chest",
+	[325659] = 325659,
+	[325660] = 325659,
+	[325661] = 325659,
+	[325662] = 325659,
+	--325663,
+	[325664] = 325659,
+	[325665] = 325659,
+	[325666] = 325659,
+	[325667] = 325659,
+	[325668] = 325659,
+	--"Glimmering Chest",
+	[322413] = 322413,
+	[327576] = 322413,
+	[327577] = 322413,
+	[327578] = 322413,
+	[326598] = 326598, --Zin'anthid 
+	--ore
+	[325873] = 325873,
+	[325874] = 325874,
+	[325875] = 325875,
+}
 --- Parses node data into the format required by Gathermate to be imported
 function WoWGatheringNodes:parseGathermateData()
 	--local NodeID_to_GathermateID = GenerateGathermateIDs()
@@ -1046,6 +1067,8 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 		[942] = true,
 		[1161] = true,
 		[1165] = true,
+		[1355] = true, -- nazatar
+		[1462] = true, --/mechago	
 	}
 
 	if zoneFilter and type(zoneFilter) == "string" then
@@ -1120,7 +1143,7 @@ local missing = {}
 		if gm_ids[name] then 
 			matchedId[id] = gm_ids[name]
 		else 
-		--print(name)
+		print(name)
 			--missing[id] = name
 		end
 
