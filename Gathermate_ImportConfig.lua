@@ -163,6 +163,7 @@ function WoWGatheringNodes:ImportGathermate()
 		db["importers"]["WoWGatheringNodes"]["lastImport"] = dataVersion
 		imported["WoWGatheringNodes"] = true
 		GatherMate:RemoveDepracatedNodes()
+		WoWGatheringNodes:DataUpdate_8_2()
 	else
 		print(LL["Failed to load WoWGatheringNodes due to "]..reason)
 	end

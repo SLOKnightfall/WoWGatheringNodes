@@ -859,26 +859,27 @@ NodeID_to_GathermateID = {
 	[278406] = 190,
 
 	--"Mechanized Chest",
-	[325659] = 325659,
-	[325660] = 325659,
-	[325661] = 325659,
-	[325662] = 325659,
+	[325659] = 560,
+	[325660] = 560,
+	[325661] = 560,
+	[325662] = 560,
 	--325663,
-	[325664] = 325659,
-	[325665] = 325659,
-	[325666] = 325659,
-	[325667] = 325659,
-	[325668] = 325659,
+	[325664] = 560,
+	[325665] = 560,
+	[325666] = 560,
+	[325667] = 560,
+	[325668] = 560,
 	--"Glimmering Chest",
-	[322413] = 322413,
-	[327576] = 322413,
-	[327577] = 322413,
-	[327578] = 322413,
-	[326598] = 326598, --Zin'anthid 
+	[322413] = 561,
+	[327576] = 561,
+	[327577] = 561,
+	[327578] = 561,
+
+	[326598] = 492, --Zin'anthid 
 	--ore
-	[325873] = 325873,
-	[325874] = 325874,
-	[325875] = 325875,
+	[325873] = 271,
+	[325874] = 272,
+	[325875] = 270,
 }
 --- Parses node data into the format required by Gathermate to be imported
 function WoWGatheringNodes:parseGathermateData()
@@ -1123,6 +1124,56 @@ function WoWGatheringNodes:CleanupGathermateImportData()
 	--GatherMateData = nil
 end
 
+function WoWGatheringNodes:DataUpdate_8_2()
+
+	local updated_ids = {
+		--"Mechanized Chest",
+		[325659] = 560,
+		[325660] = 560,
+		[325661] = 560,
+		[325662] = 560,
+		--325663,
+		[325664] = 560,
+		[325665] = 560,
+		[325666] = 560,
+		[325667] = 560,
+		[325668] = 560,
+		--"Glimmering Chest",
+		[322413] = 561,
+		[327576] = 561,
+		[327577] = 561,
+		[327578] = 561,
+
+		[326598] = 492, --Zin'anthid 
+		--ore
+		[325873] = 271,
+		[325874] = 272,
+		[325875] = 270,
+	}
+
+	local DB_List = {
+		GatherMate2HerbDB,
+		GatherMate2MineDB,
+		GatherMate2TreasureDB,
+	}
+
+
+	for _,DB_Type in ipairs(DB_List) do
+		for zone, zone_data in pairs(DB_Type) do
+			for coords, node_id in pairs(zone_data) do
+				if updated_ids[node_id] then
+					if type(updated_ids[node_id] ) == "number" then 
+						zone_data[coords] = updated_ids[node_id] 
+					else
+					end
+				end
+			end
+		end
+	end
+
+	WoWGatheringNodesConfig["8.2_Update"] = true
+end
+
 
 --@do-not-package@ 
 --Builds a list of nodeIDs with the matching CarboniteID's
@@ -1174,6 +1225,9 @@ local missing = {}
 WoWGatheringNodesConfig.gm2 = missing
 end
 
+
+
+
 function MissingGathermateIDs2()
 --GatherMate.nodeIDs
 WoWGatheringNodesConfig.gm2 = {}
@@ -1201,5 +1255,29 @@ local missing = {}
 	end
 
 WoWGatheringNodesConfig.gm2 = dump
+end
+
+
+function mech()
+local new_zonee = {}
+	local DB_List = {
+		GatherMate2HerbDB,
+		GatherMate2MineDB,
+		GatherMate2TreasureDB,
+	}
+
+	for _, DB in ipairs(DB_List) do
+
+		local zone_data = DB[1462]
+		print(DB)
+		for coord, node_id in pairs(zone_data) do
+		local new_cord = coord/100
+		new_zonee[node_id] = new_zonee[node_id] or {}
+		tinsert(node_id,new_cord)
+		end
+
+	end
+	WoWGatheringNodesConfig.mecha = new_zonee
+
 end
  --@end-do-not-package@
