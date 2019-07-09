@@ -344,9 +344,9 @@ function WoWGatheringNodes:AddCustomGathermateNodes(reset)
 	end
 	if reset then 
 
-		WoWGatheringNodes:RoutesHook(false)
-	else
 		WoWGatheringNodes:RoutesHook(true)
+	else
+		WoWGatheringNodes:RoutesHook(false)
 	end
 end
 
@@ -416,6 +416,7 @@ local translate_db_type = {
 	["Archaeology"] = "Archaeology",
 	["Logging"] = "Logging",
 }
+local Routes_hook 
 
 local function Gathermate_AppendNodes(node_list, zone, db_type, node_type)
 	--return hook.hooks[Routes.plugins["GatherMate2"]]["AppendNodes"](node_list, zone, db_type, node_type)
@@ -434,7 +435,7 @@ local function Gathermate_AppendNodes(node_list, zone, db_type, node_type)
 
 end
 
-local Routes_hook 
+
 
 if IsAddOnLoaded("Routes") then 
 	Routes_hook = Routes.plugins["GatherMate2"]["AppendNodes"]
