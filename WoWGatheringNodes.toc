@@ -1,14 +1,14 @@
-## Interface: 80200
-## Notes: Gathering Node data from WoWHead for GatherMate2 & Gatherer
-## Title: WoWGatheringNodes v.@project-version@
+## Interface: 11302
+## Notes: Classic Gathering Node data from WoWHead for GatherMate2 & Carbonite
+## Title: WoWGatheringNodes - Classic v.@project-version@
 ## Author: SLOKnightfall
 ## X-Category: Map
 ## X-Email:
 ## Version:@project-version@
-## OptionalDeps: Gatherer, GatherMate2, Carbonite
+## OptionalDeps: GatherMate2, Carbonite
 ## X-Gatherer-Plugin-Name: WoWGatheringNodes
 ## X-Gatherer-Plugin-Type: DATABASE
-## X-Gatherer-Plugin-DatabaseID: WoWGatheringNodes @project-date-iso@
+## X-Gatherer-Plugin-DatabaseID: WoWGatheringNodes - Classic @project-date-iso@
 
 ## SavedVariables: WoWGatheringNodesConfig,
 
@@ -44,9 +44,6 @@ WoWGatheringNodeCatagories.lua
 #Files for Gathermate importing
 Gathermate_ImportConfig.lua
 Gathermate_Import.lua
-
-#Files for Gatherer importing
-Gatherer_Import.lua
 
 #Files for Carbonite importing
 Carbonite_Import.lua
