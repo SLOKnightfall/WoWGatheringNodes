@@ -880,6 +880,12 @@ NodeID_to_GathermateID = {
 	[325873] = 271,
 	[325874] = 272,
 	[325875] = 270,
+
+	--Jelly
+[327232]=563,
+[327230] = 563,
+[327231] = 563,
+[327516] = 563,
 }
 --- Parses node data into the format required by Gathermate to be imported
 function WoWGatheringNodes:parseGathermateData()
