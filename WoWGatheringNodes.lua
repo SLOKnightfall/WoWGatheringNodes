@@ -268,6 +268,7 @@ function WoWGatheringNodes:OnEnable()
 
 		--if datafile matches last import version, no need to import
 		if Profile.GathermateImport ~= WoWGatheringNodes.generatedVersion and Profile.AutoImportGathermate then
+			WoWGatheringNodes.runautoimport = true
 			WoWGatheringNodes:ImportGathermate()
 		--else
 		end

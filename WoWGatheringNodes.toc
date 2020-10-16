@@ -1,4 +1,4 @@
-## Interface: 80300
+## Interface: 90001
 ## Notes: Gathering Node data from WoWHead for GatherMate2 & Gatherer
 ## Title: WoWGatheringNodes v.@project-version@
 ## Author: SLOKnightfall

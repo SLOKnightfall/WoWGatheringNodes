@@ -130,15 +130,18 @@ WoWGatheringNodes_Op = {
 				WoWGatheringNodes:ImportGathermate()
 			end,
 			disabled = function()
-				local cm = 0
-				if db["importers"]["WoWGatheringNodes"].Databases["Mines"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Herbs"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Gases"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Fish"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Treasure"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Archaeology"] then cm = 1 end
-				if db["importers"]["WoWGatheringNodes"].Databases["Logging"] then cm = 1 end
-				return imported["WoWGatheringNodes"] or (cm == 0 and not imported["WoWGatheringNodes"])
+				if  not WoWGatheringNodes.runautoimport then 
+					local cm = 0
+					if db["importers"]["WoWGatheringNodes"].Databases["Mines"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Herbs"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Gases"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Fish"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Treasure"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Archaeology"] then cm = 1 end
+					if db["importers"]["WoWGatheringNodes"].Databases["Logging"] then cm = 1 end
+					return imported["WoWGatheringNodes"] or (cm == 0 and not imported["WoWGatheringNodes"])
+				end
+				WoWGatheringNodes.runautoimport = false
 			end,
 		}
 	},
