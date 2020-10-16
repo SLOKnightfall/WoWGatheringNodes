@@ -1,4 +1,7 @@
-WoWGatheringNodes 
+WoWGatheringNodes [![](http://cf.way2muchnoise.eu/279801.svg)](https://www.curseforge.com/wow/addons/wowgatheringnodes)[![](http://img.shields.io/badge/runs-retail+classic-brightgreen)](https://www.curseforge.com/wow/addons/wowgatheringnodes)
+
+[![](https://media.forgecdn.net/attachments/76/25/patreon-medium-button.png)](https://www.patreon.com/SLOKnightfall)
+
 ===
 
 WoWGatheringNodes is a data importer for both Gathermate2 and Gatherer. It currently includes up to date data points for the following objects:
