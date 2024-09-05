@@ -73,7 +73,7 @@ local myOptionsTable = {
 					type = "toggle",
 					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportGathermate = val end,
 					get = function(info) return WoWGatheringNodes.db.profile.AutoImportGathermate end,
-					disabled = function() return not IsAddOnLoaded("Gathermate2") end,
+					disabled = function() return not C_AddOns.IsAddOnLoaded("Gathermate2") end,
 					order = 1,
 					width = "full",
 				},
@@ -88,7 +88,7 @@ local myOptionsTable = {
 					type = "toggle",
 					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportCarboniteMines = val end,
 					get = function(info) return WoWGatheringNodes.db.profile.AutoImportCarboniteMines end,
-					disabled = function() return not IsAddOnLoaded("Carbonite") end,
+					disabled = function() return not C_AddOns.IsAddOnLoaded("Carbonite") end,
 					order = 3,
 					width = "full",
 				},
@@ -98,7 +98,7 @@ local myOptionsTable = {
 					type = "toggle",
 					set = function(info,val) WoWGatheringNodes.db.profile.AutoImportCarboniteHerbs = val end,
 					get = function(info) return WoWGatheringNodes.db.profile.AutoImportCarboniteHerbs end,
-					disabled = function() return not IsAddOnLoaded("Carbonite") end,
+					disabled = function() return not C_AddOns.IsAddOnLoaded("Carbonite") end,
 					order = 4, 
 					width = "full",
 				},
@@ -225,7 +225,7 @@ end
 --- Ace Initilizer
 function WoWGatheringNodes:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("WoWGatheringNodesConfig", defaults, true)
-	WoWGatheringNodes.generatedVersion = GetAddOnMetadata("WoWGatheringNodes", "X-Gatherer-Plugin-DatabaseID")
+	WoWGatheringNodes.generatedVersion = C_AddOns.GetAddOnMetadata("WoWGatheringNodes", "X-Gatherer-Plugin-DatabaseID")
 	--myOptionsTable.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("WoWGatheringNodesConfig", myOptionsTable)
 	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("WoWGatheringNodesConfig", "WoWGatheringNodes")
@@ -241,21 +241,7 @@ end
 --- Cycles through the custom node list and injects data into Gatherer
 function WoWGatheringNodes:OnEnable()
 	--Delays registration of the import untill after Gatherer has time to finish loading the plugin data
-	if IsAddOnLoaded("Gatherer") then
-		hooksecurefunc(Gatherer.Plugins,"LoadPluginData", function()
-			Gatherer.Plugins.RegisterDatabaseImport("WoWGatheringNodes", WoWGatheringNodes.PerformGathererImport)
-		end)
-
-		if Profile.InjectNodes then
-				WoWGatheringNodes:AddCustomGathererNodes()
-		end
-
-		if Profile.GathererImport ~= WoWGatheringNodes.generatedVersion and Profile.AutoImport then
-		else
-		end
-	end
-
-	if IsAddOnLoaded("Gathermate2") then
+	if C_AddOns.IsAddOnLoaded("Gathermate2") then
 		GatherMate = LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
 		if Profile.InjectNodes then
 			WoWGatheringNodes:AddCustomGathermateNodes()
@@ -274,27 +260,13 @@ function WoWGatheringNodes:OnEnable()
 		end
 
 		--renames node ids to match updated gathermate2 ids for 8.2 tracked nodes
-		if not WoWGatheringNodesConfig["8.2_Update"] then WoWGatheringNodes:DataUpdate_8_2() end
-	end
-
-	if IsAddOnLoaded("Carbonite") then
-		if Profile.CarboniteImport ~= WoWGatheringNodes.generatedVersion  then
-		
-			if Profile.AutoImportCarboniteHerbs then
-				WoWGatheringNodes:GatherImportCarb("NXHerb")
-			end
-			
-			if Profile.AutoImportCarboniteMines then
-				WoWGatheringNodes:GatherImportCarb("NXMine")
-				
-			end
-		end
+		--if not WoWGatheringNodesConfig["8.2_Update"] then WoWGatheringNodes:DataUpdate_8_2() end
 	end
 
 	if ((Profile.GathermateImport == WoWGatheringNodes.generatedVersion
 			or Profile.GathererImport == WoWGatheringNodes.generatedVersion)
 			and Profile.AutoClear)
-		or (not IsAddOnLoaded("Gathermate2") and not IsAddOnLoaded("Gatherer") and not IsAddOnLoaded("Carbonite")) then
+		or (not C_AddOns.IsAddOnLoaded("Gathermate2") and not C_AddOns.IsAddOnLoaded("Gatherer") and not C_AddOns.IsAddOnLoaded("Carbonite")) then
 
 		--No gathering addons loaded so there is no need for tables.
 		--WoWGatheringNodes.Data = {}
@@ -314,11 +286,8 @@ end
 --- Toggle function to add/remove custom data
 --pram: reset  reset param to be passed to the actual injection functions
 function WoWGatheringNodes:toggleCustomNodes(reset)
- 	if IsAddOnLoaded("Gathermate2") then
+ 	if C_AddOns.IsAddOnLoaded("Gathermate2") then
 		WoWGatheringNodes:AddCustomGathermateNodes(reset)
-	end
-	if IsAddOnLoaded("Gatherer") then
-		WoWGatheringNodes:AddCustomGathererNodes(reset)
 	end
 end
 
@@ -357,62 +326,6 @@ function WoWGatheringNodes:AddCustomGathermateNodes(reset)
 
 end
 
-
---- Cycles through the custom node list and injects data into Gatherer
---pram: reset  If true, removes the injected data
-function WoWGatheringNodes:AddCustomGathererNodes(reset)
-	for nodeID, data in pairs(WoWGatheringNodes.CustomNodesList ) do
-		local icon_path = data.Icon
-		local nodeName = WoWGatheringNodes.NodeIdNames[nodeID] --data.Name
-		local nodeType = data.Type
-		local stubName = data.Name
-
-		if nodeType == "Treasure" then
-			stubName = "TREASURE_"..stubName
-			nodeType = "OPEN"
-		elseif nodeType == "Herb" then
-			stubName = "HERB"..stubName
-			nodeType = "HERB"
-		elseif nodeType == "Mine" then
-			stubName = "MINE"..stubName
-			nodeType = "MINE"
-
-		end
-		--GatherMate.nodeTextures[nodeType][nodeID] = icon_path
-		--GatherMate.nodeIDs[nodeType][nodeName] = nodeID
-		--GatherMate.reverseNodeIDs[nodeType][nodeID] = nodeName
-
-		if reset or not Profile.CustomNodes[nodeName] then
-			Gatherer.Nodes.Objects[nodeID] = nil
-			Gatherer.Nodes.Names[nodeName] = nil
-			Gatherer.Categories.ObjectCategories[nodeID] = nil
-			Gatherer.Categories.CategoryNames[stubName] = nil
-			Gatherer.Icons[nodeID] = nil
-			--print("clear")
-		else
-			Gatherer.Nodes.Objects[nodeID] = "OPEN"
-			Gatherer.Nodes.Names[nodeName] = nodeID
-			Gatherer.Categories.ObjectCategories[nodeID] = stubName
-			Gatherer.Categories.CategoryNames[stubName] = nodeName
-			Gatherer.Nodes.PrimaryItems[nodeID] = data.IconID --Item number to be used for the icon
-			--print("inject")
-		end
-	end
-
-	--Cycles though the Gatherer name table to rebuild the local nodeNames table to include injected data.
-	local nodeNames = {}
-
-	for name, objectID in pairs(Gatherer.Nodes.Names) do
-		nodeNames[objectID] = name
-	end
-
-	--Overwrites the standard gatherer function to use the new table with injected names, should really hook-redirect
-	function Gatherer.Util.GetNodeName(objectID)
-		return nodeNames[objectID] or ("Unknown: "..objectID)
-	end
-end
-
-
 --Fix for routes issue where it does not recognize ijected items
 local translate_db_type = {
 	["Herb Gathering"] = "Herbalism",
@@ -444,12 +357,12 @@ end
 
 
 
-if IsAddOnLoaded("Routes") then 
+if C_AddOns.IsAddOnLoaded("Routes") then 
 	Routes_hook = Routes.plugins["GatherMate2"]["AppendNodes"]
 end
 
 function WoWGatheringNodes:RoutesHook(reset)
-	if not IsAddOnLoaded("Routes") then return end
+	if not C_AddOns.IsAddOnLoaded("Routes") then return end
 	if reset then 
 		Routes.plugins["GatherMate2"]["AppendNodes"] = Routes_hook
 	else

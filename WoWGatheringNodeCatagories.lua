@@ -3,6 +3,12 @@ local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 
 WoWGatheringNodes.Catagories = {
 	["mining-nodes"] = {
+		[413046]="Bismuth",
+		[413047]="Aqirite",
+		[413049]="Ironclaw",
+		[413882]="Ironclaw Seam",
+		[413880]="Bismuth Seam",
+		[413881]="Aqirite Seam",
 		[325875] = "Osmenite Deposit",
 		[325874] = "Osmenite Seam",
 		[325873] = "Rich Osmenite Deposit",
@@ -1025,6 +1031,18 @@ WoWGatheringNodes.Catagories = {
 		[233132] = "Freshwater Clam",
 	},
 	["herb-objects"] = {
+		[454010] = "Luredrop",
+		[414316] = "Luredrop",
+		[454055] = "Luredrop",
+		[414315] = "Mycobloom",
+		[454071] = "Mycobloom",
+		[454063] = "Mycobloom",
+		[414319] = "Arathors Spear",
+		[414317] = "Orbinid",
+		[454081] = "Blessing Blossom",
+		[414318] = "Blessing Blossom",
+		[454086] = "Blessing Blossom",
+
 		[326598] = "Zin'anthid",
 		[208544] = "Magmolia",
 		[248019] = "Lively Aethril",

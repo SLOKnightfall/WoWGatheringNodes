@@ -5,7 +5,7 @@
 --  https://mods.curse.com/addons/wow/gathermate2
 --///////////////////////////////////////////////////////////////////////////////////////////
 
-if not IsAddOnLoaded("GatherMate2") then return end
+if not C_AddOns.IsAddOnLoaded("GatherMate2") then return end
 
 local GatherMate = LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
@@ -44,6 +44,7 @@ ImportHelper.expac_data = {
 	["WOD"] = L["Warlords of Draenor"],
 	["LEGION"] = L["Legion"],
 	["BFA"] = "Battle For Azeroth",
+	["TWW"] = "The War Within",
 }
 
 imported["WoWGatheringNodes_Data"] = false
@@ -53,13 +54,6 @@ WoWGatheringNodes_Op = {
 	type = "group",
 	name = "WoWGatheringNodes", -- addon name to import from, don't localize
 	handler = ImportHelper,
-	disabled = function()
-		local name, title, notes, loadable, reason, security, newVersion = GetAddOnInfo("WoWGatheringNodes")
-		local enabled = GetAddOnEnableState(UnitName("player"), "WoWGatheringNodes") > 0
-		-- disable if the addon is not enabled, or
-		-- disable if there is a reason why it can't be loaded ("MISSING" or "DISABLED")
-		return not enabled or (reason ~= nil and reason ~= "DEMAND_LOADED")
-	end,
 	args = {
 		desc = {
 			order = 0,
@@ -150,7 +144,7 @@ WoWGatheringNodes_Op = {
 Config:RegisterImportModule("WoWGatheringNodes", WoWGatheringNodes_Op)
 
 function WoWGatheringNodes:ImportGathermate()
-	local loaded, reason = LoadAddOn("WoWGatheringNodes")
+	local loaded, reason = C_AddOns.LoadAddOn("WoWGatheringNodes")
 	--print(LoadAddOn("WoWGatheringNodes"))
 	local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 	if loaded and WoWGatheringNodes.generatedVersion then

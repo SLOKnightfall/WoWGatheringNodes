@@ -5,7 +5,7 @@
 --  https://mods.curse.com/addons/wow/gathermate2
 --///////////////////////////////////////////////////////////////////////////////////////////
 
-if not IsAddOnLoaded("GatherMate2") then return end
+if not C_AddOns.IsAddOnLoaded("GatherMate2") then return end
 
 local WoWGatheringNodes = LibStub("AceAddon-3.0"):GetAddon("WoWGatheringNodes")
 local GatherMate = LibStub("AceAddon-3.0"):GetAddon("GatherMate2")
@@ -21,7 +21,7 @@ local _G = getfenv(0)
 local pairs = _G.pairs
 local ipairs = _G.ipairs
 
-WoWGatheringNodes.generatedVersion = GetAddOnMetadata("WoWGatheringNodes", "X-Gatherer-Plugin-DatabaseID")
+WoWGatheringNodes.generatedVersion = C_AddOns.GetAddOnMetadata("WoWGatheringNodes", "X-Gatherer-Plugin-DatabaseID")
 
 NodeID_to_GathermateID = {
 	[181069] = 225,
@@ -886,6 +886,30 @@ NodeID_to_GathermateID = {
 [327230] = 563,
 [327231] = 563,
 [327516] = 563,
+
+--TWW
+[454010] = 1455,--luredrop
+[414316] = 1455,--luredrop
+[454055] = 1455,--luredrop
+[414315] = 1439, --Mycobloom
+[454071] = 1439, --Mycobloom
+[454063] = 1439,--Mycobloom
+[414319] = 1471,--arathors-spear
+[414317] = 1463,--orbinid
+[454081] = 1447,--blessing-blossom
+[414318] = 1447,--blessing-blossom
+[454086] = 1447,--blessing-blossom
+
+
+[413046] = 1218, --bismuth
+[413047]= 1226,--aqirite
+[413049]= 1234,--ironclaw
+[413882]= 1241,--ironclaw-seam
+[413880]= 1225,--bismuth-seam
+[413881]= 1233,--aqirite-seam
+
+
+
 }
 --- Parses node data into the format required by Gathermate to be imported
 function WoWGatheringNodes:parseGathermateData()
@@ -1078,6 +1102,15 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 		[1462] = true, --/mechago	
 	}
 
+		local twwZones = {
+		[2248] = true,
+		[2255] = true,
+		[2213] = true,
+		[2339] = true,
+		[2214] = true,
+		[2215] = true,	
+	}
+
 	if zoneFilter and type(zoneFilter) == "string" then
 		if zoneFilter == "TBC" then
 			filter = bcZones
@@ -1093,6 +1126,8 @@ function WoWGatheringNodes:PerformMerge(dbs ,style, zoneFilter)
 			filter = legionZones
 		elseif zoneFilter == "BFA" then
 			filter = bfaZones
+		elseif zoneFilter == "TWW" then
+			filter = twwZones
 		end
 	end
 
