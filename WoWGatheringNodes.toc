@@ -9,6 +9,8 @@
 ## X-Gatherer-Plugin-Name: WoWGatheringNodes
 ## X-Gatherer-Plugin-Type: DATABASE
 ## X-Gatherer-Plugin-DatabaseID: WoWGatheringNodes @project-date-iso@
+## X-Curse-Project-ID: 279801
+## X-Wago-ID: j6jzv46R
 
 ## SavedVariables: WoWGatheringNodesConfig,
 
